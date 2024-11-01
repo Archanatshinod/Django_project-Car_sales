@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cars for Sale</title>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #f4f4f4;
+    }
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My Cars for Sale</h1>
+
+        {% if my_cars %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Car Name</th>
+                    <th>Model Year</th>
+                    <th>KM Driven</th>
+                    <th>Brand</th>
+                    <th>Oil Type</th>
+                    <th>Price</th>
+                    <th>Mileage</th>
+                    <th>Description</th>
+                    <th>Images</th>
+                    <th>Registration Number</th>
+                    <th>Insurance End Date</th>
+                    <th>Ownership Type</th>
+                    <th>Accidental Background</th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for car in my_cars %}
+                    <tr>
+                        <td>{{ car.name }}</td>
+                        <td>{{ car.model_year }}</td>
+                        <td>{{ car.km_driven }} km</td>
+                        <td>{{ car.brand.name }}</td>
+                        <td>{{ car.oil_type }}</td>
+                        <td>{{ car.price }}</td>
+                        <td>{{ car.mileage }} km/l</td>
+                        <td>{{ car.description }}</td>
+                        <td>
+                            {% if car.front_image %}
+                                <img src="{{ car.front_image.url }}" alt="Front" width="50">
+                            {% else %}
+                                <p>No Image</p>
+                            {% endif %}
+                            {% if car.leftside_img %}
+                                <img src="{{ car.leftside_img.url }}" alt="Left Side" width="50">
+                            {% else %}
+                                <p>No Image</p>
+                            {% endif %}
+                            {% if car.rightside_img %}
+                                <img src="{{ car.rightside_img.url }}" alt="Right Side" width="50">
+                            {% else %}
+                                <p>No Image</p>
+                            {% endif %}
+                            {% if car.back_image %}
+                                <img src="{{ car.back_image.url }}" alt="Back" width="50">
+                            {% else %}
+                                <p>No Image</p>
+                            {% endif %}
+                        </td>
+                        <td>{{ car.registration_number }}</td>
+                        <td>{{ car.insurance_end_date }}</td>
+                        <td>{{ car.ownership_type }}</td>
+                        <td>{{ car.accidental_background|yesno:"Yes,No" }}</td>
+                        <td> <button> Edit Car </button> </td>
+                        <td> <button> Delete Car </button> </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No cars available for sale at the moment.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

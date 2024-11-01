@@ -1,0 +1,41 @@
+<!-- USER HOME -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+    <div style="text-align: center;">
+        <a href="{% url 'logout' %}" style="position: absolute; top: 10px; right: 10px; color: red;">Logout</a>
+        
+<div style="text-align: center;">
+    <h4>Welcome to the Home Page</h4>
+    
+    {% if username %}
+        <h3 style="color: blueviolet;">Username: {{ username }}</h3>
+    {% endif %}
+
+</div>  
+<div>
+    <h3>SALE</h3>
+    <ol>
+        <li><a href="{% url 'add_car_for_sale' %}">Add car for sale</a></li>
+        <li><a href="{% url 'list_cars_for_sale' %}">List of cars for sale</a></li>
+        <li><a href="{% url 'list_of_my_cars' %}">List of my cars for sale</a></li>
+
+    </ol>
+</div>  
+<div>
+    <h3>RENT</h3>
+    <ol>
+        <li><a href="{% url 'add_car_for_rent' %}">Add car for Rent</a></li>
+        <li><a href="{% url 'list_cars_for_rent' %}">List of cars for Rent</a></li>
+        <li><a href="{% url 'list_of_my_cars_for_rent' %}">List of  my cars for Rent</a></li>
+
+
+    </ol>
+</div>  
+</body>
+</html>

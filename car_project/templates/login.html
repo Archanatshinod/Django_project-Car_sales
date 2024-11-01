@@ -1,0 +1,43 @@
+<!-- LOGIN -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Project</title>
+</head>
+<body>
+    <div class="login" style="text-align: center;">
+        {% if messages %}
+            {% for message in messages %}
+                <div style="color: green;">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        <h4>LOGIN</h4>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form">
+                <label class="l" for="username">Username: </label>
+                <input type="text" name="username" class="form-control" placeholder="Enter your Username" required>
+                <br><br>
+                <label class="l" for="password">Password: </label>
+                <input type="password" name="password" class="form-control" id="passwordField" placeholder="Enter your password" required><br><br>
+                <div>
+                    <button type="submit">LOGIN</button><br><br>
+                    <div class="ack">Don't have an account? <a href="{% url 'User_registration' %}">Register</a></div>
+                </div>
+            </div>
+        </form>
+        
+        {% if message %}
+          <p style="color: green;">{{ message }}</p>
+          {% endif %}
+        {% if error %}
+              <p style="color: red;">{{ error }}</p>
+        {% endif %}
+            
+    </div>
+</body>
+</html>
+

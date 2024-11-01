@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cars for Rent</title>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #f4f4f4;
+    }
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My Cars for Rent</h1>
+
+        {% if my_cars %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Car Name</th>
+                    
+                    <th>Brand</th>
+                    <th>Oil Type</th>
+                    <th>Price Per Day</th>
+                    <th>Mileage</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for car in my_cars %}
+                    <tr>
+                        <td>{{ car.name }}</td>
+                        <td>{{ car.brand.name }}</td>
+                        <td>{{ car.oil_type }}</td>
+                        <td>{{ car.price_per_day }}</td>
+                        <td>{{ car.mileage }} km/l</td>
+                        <td>{{ car.description }}</td>
+                        <td>
+                            {% if car.rent_car_image %}
+                                <img src="{{ car.rent_car_image.url }}" alt="Front" width="50">
+                            {% else %}
+                                <p>No Image</p>
+                            {% endif %}
+                        </td>
+                        <td> <button> Edit Car </button> </td>
+                        <td> <button> Delete Car </button> </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No cars available for Rent at the moment.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

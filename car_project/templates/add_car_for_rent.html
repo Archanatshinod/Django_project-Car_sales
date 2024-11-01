@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Car for Rent</title>
+</head>
+<body>
+    <h2>Add Car for Rent</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <label for="name">Car Name:</label>
+        <input type="text" name="name" required><br>
+    
+        <label for="brand">Brand:</label>
+        <input type="text" name="brand" required><br>
+
+        <label for="oil_type">Oil Type:</label>
+        <select name="oil_type" required>
+            <option value="Petrol">Petrol</option>
+            <option value="Diesel">Diesel</option>
+            <option value="Electric">Electric</option>
+        </select><br>
+
+        <label for="description">Description:</label>
+        <textarea name="description" rows="4" cols="50"></textarea><br>
+    
+        <label for="price">Price Per Day:</label>
+        <input type="number" name="price_per_day" step="0.01" required><br>
+    
+        <label for="mileage">Mileage:</label>
+        <input type="number" name="mileage" step="0.01" required><br>
+    
+        <label for="front_image">Car Image:</label>
+        <input type="file" name="rent_car_image" accept="image/*"><br>
+    
+        <button type="submit">Add Car</button>
+    </form>
+</body>
+</html>
