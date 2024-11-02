@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -24,8 +24,55 @@
     </style>
 </head>
 <body>
+    <nav>
+        <form method="GET" action="{% url 'list_cars_for_sale' %}">
+            <input type="text" name="search" placeholder="Search by Car Name" value="{{ request.GET.search }}">
+            
+            <select name="brand">
+                <option value="">All Brands</option>
+                {% for brand in brands %}
+                    <option value="{{ brand.name }}" {% if request.GET.brand == brand.name %}selected{% endif %}>{{ brand.name }}</option>
+                {% endfor %}
+            </select>
+        
+            <select name="year">
+                <option value="">All Years</option>
+                <option value="below_3_years" {% if request.GET.year == 'below_3_years' %}selected{% endif %}>Below 3 Years</option>
+                <option value="3_to_5_years" {% if request.GET.year == '3_to_5_years' %}selected{% endif %}>3-5 Years</option>
+                <option value="5_to_10_years" {% if request.GET.year == '5_to_10_years' %}selected{% endif %}>5-10 Years</option>
+                <option value="above_10_years" {% if request.GET.year == 'above_10_years' %}selected{% endif %}>Above 10 Years</option>
+            </select>
+        
+            <select name="km">
+                <option value="">All KM</option>
+                <option value="below_10k" {% if request.GET.km == 'below_10k' %}selected{% endif %}>Below 10k</option>
+                <option value="10k_to_20k" {% if request.GET.km == '10k_to_20k' %}selected{% endif %}>10k-20k</option>
+                <option value="20k_to_40k" {% if request.GET.km == '20k_to_40k' %}selected{% endif %}>20k-40k</option>
+                <option value="above_40k" {% if request.GET.km == 'above_40k' %}selected{% endif %}>Above 40k</option>
+            </select>
+        
+            <select name="oil_type">
+                <option value="">All Oil Types</option>
+                {% for oil_type in oil_types %}
+                    <option value="{{ oil_type.oil_type }}" {% if request.GET.oil_type == oil_type.oil_type %}selected{% endif %}>{{ oil_type.oil_type }}</option>
+                {% endfor %}
+            </select>
+        
+            <select name="price">
+                <option value="">All Prices</option>
+                <option value="below_50k" {% if request.GET.price == 'below_50k' %}selected{% endif %}>Below 50k</option>
+                <option value="1L_to_3L" {% if request.GET.price == '1L_to_3L' %}selected{% endif %}>1L-3L</option>
+                <option value="3L_to_5L" {% if request.GET.price == '3L_to_5L' %}selected{% endif %}>3L-5L</option>
+                <option value="5L_to_10L" {% if request.GET.price == '5L_to_10L' %}selected{% endif %}>5L-10L</option>
+                <option value="above_10L" {% if request.GET.price == 'above_10L' %}selected{% endif %}>Above 10L</option>
+            </select>
+        
+            <button type="submit">Filter</button>
+        </form>
+    </nav>
 
 <h1>Cars Available for Sale</h1>
+
 
 {% if cars %}
 
@@ -116,4 +163,7 @@
 
 
 </body>
-</html>
+</html> 
+
+
+

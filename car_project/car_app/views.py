@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import *
+from django import forms
 
 # Create your views here.
 
@@ -156,9 +157,9 @@ def add_car_for_sale(request):
 
 #---------------------------LIST OF CARS FOR SALES ----------------------------------------
 
-def list_cars_for_sale(request):
-    cars = CarForSale.objects.order_by('?')[:10]
-    return render(request, 'list_cars_for_sale.html', {'cars': cars})
+# def list_cars_for_sale(request):
+#     cars = CarForSale.objects.order_by('?')[:10]
+#     return render(request, 'list_cars_for_sale.html', {'cars': cars})
 
 #------------------------------LIST OF MY CARS ----------------------------------------
 
@@ -234,3 +235,91 @@ def list_my_cars_for_rent(request):
 
     my_cars = CarForRent.objects.filter(user_id=user_id)
     return render(request, 'list_my_cars_for_rent.html', {'my_cars': my_cars})
+
+
+#---------------------------------EDIT MY CARS FOR SALE-------------------------------------------
+
+def edit_my_cars(request):
+    car=CarForSale.objects.filter()
+    return render(request,'edit_my_cars.html')
+
+
+#---------------------------------EDIT MY CARS FOR RENT -------------------------------------------
+
+def edit_my_rent_cars(request):
+    return render(request,'edit_my_rent_cars.html')
+
+
+#-------------------------------FILTER------------------------------------------------------------
+
+from django.utils import timezone
+def list_cars_for_sale(request):
+    # Start with all cars
+    cars = CarForSale.objects.all()
+
+    # Get current year
+    current_year = timezone.now().year
+
+    # Get filter parameters from the request
+    brand_filter = request.GET.get('brand')
+    year_filter = request.GET.get('year')
+    km_filter = request.GET.get('km')
+    oil_type_filter = request.GET.get('oil_type')
+    price_filter = request.GET.get('price')
+    search_filter = request.GET.get('search')  
+
+    # Apply filters based on user selections
+    if brand_filter:
+        print("Brand Filter:", brand_filter)  
+        cars = cars.filter(brand__name__iexact=brand_filter)
+        
+
+    if year_filter:
+        if year_filter == 'below_3_years':
+            cars = cars.filter(model_year__gte=current_year - 3)
+        elif year_filter == '3_to_5_years':
+            cars = cars.filter(model_year__range=(current_year - 5, current_year - 3))
+        elif year_filter == '5_to_10_years':
+            cars = cars.filter(model_year__range=(current_year - 10, current_year - 5))
+        elif year_filter == 'above_10_years':
+            cars = cars.filter(model_year__lt=current_year - 10)
+
+    if km_filter:
+        if km_filter == 'below_10k':
+            cars = cars.filter(km_driven__lt=10000)
+        elif km_filter == '10k_to_20k':
+            cars = cars.filter(km_driven__range=(10000, 20000))
+        elif km_filter == '20k_to_40k':
+            cars = cars.filter(km_driven__range=(20000, 40000))
+        elif km_filter == 'above_40k':
+            cars = cars.filter(km_driven__gt=40000)
+
+    if oil_type_filter:
+        cars = cars.filter(oil_type__oil_type=oil_type_filter)
+
+    if price_filter:
+        if price_filter == 'below_50k':
+            cars = cars.filter(price__lt=50000)
+        elif price_filter == '1L_to_3L':
+            cars = cars.filter(price__range=(100000, 300000))
+        elif price_filter == '3L_to_5L':
+            cars = cars.filter(price__range=(300000, 500000))
+        elif price_filter == '5L_to_10L':
+            cars = cars.filter(price__range=(500000, 1000000))
+        elif price_filter == 'above_10L':
+            cars = cars.filter(price__gt=1000000)
+
+    # Get all available brands and oil types for the filters
+    brands = Brand.objects.all()
+    oil_types = OilType.objects.all()
+
+    if search_filter:
+        cars = cars.filter(name__icontains=search_filter)  # Assuming 'name' is the field for the car name
+
+
+    # Render the template with filtered cars and available brands and oil types
+    return render(request, 'list_cars_for_sale.html', {
+        'cars': cars,
+        'brands': brands,
+        'oil_types': oil_types
+    })

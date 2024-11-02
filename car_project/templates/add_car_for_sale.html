@@ -11,54 +11,54 @@
         {% csrf_token %}
         
         <label for="name">Car Name:</label>
-        <input type="text" name="name" required><br>
+        <input type="text" name="name" required><br><br>
     
         <label for="model_year">Model Year:</label>
-        <input type="number" name="model_year" required><br>
+        <input type="number" name="model_year" required><br><br>
     
         <label for="km_driven">Kilometers Driven:</label>
-        <input type="number" name="km_driven" required><br>
+        <input type="number" name="km_driven" required><br><br>
     
         <label for="brand">Brand:</label>
-        <input type="text" name="brand" required><br>
+        <input type="text" name="brand" required><br><br>
 
         <label for="oil_type">Oil Type:</label>
         <select name="oil_type" required>
             <option value="Petrol">Petrol</option>
             <option value="Diesel">Diesel</option>
             <option value="Electric">Electric</option>
-        </select><br>
+        </select><br><br>
 
         <label for="accidental_background">Accidental Background:</label>
         <input type="radio" name="accidental_background" value="True" required> Yes
-        <input type="radio" name="accidental_background" value="False" required> No<br>
+        <input type="radio" name="accidental_background" value="False" required> No<br><br>
 
         <label for="description">Description:</label>
-        <textarea name="description" rows="4" cols="50"></textarea><br>
+        <textarea name="description" rows="4" cols="50"></textarea><br><br>
     
         <label for="price">Price:</label>
-        <input type="number" name="price" step="0.01" required><br>
+        <input type="number" name="price" step="0.01" required><br><br>
     
         <label for="mileage">Mileage:</label>
-        <input type="number" name="mileage" step="0.01" required><br>
+        <input type="number" name="mileage" step="0.01" required><br><br>
     
         <label for="front_image">Front Image:</label>
-        <input type="file" name="front_image" accept="image/*"><br>
+        <input type="file" name="front_image" accept="image/*"><br><br>
     
         <label for="leftside_img">Left Side Image:</label>
-        <input type="file" name="leftside_img" accept="image/*"><br>
+        <input type="file" name="leftside_img" accept="image/*"><br><br>
     
         <label for="rightside_img">Right Side Image:</label>
-        <input type="file" name="rightside_img" accept="image/*"><br>
+        <input type="file" name="rightside_img" accept="image/*"><br><br>
     
         <label for="back_image">Back Image:</label>
-        <input type="file" name="back_image" accept="image/*"><br>
+        <input type="file" name="back_image" accept="image/*"><br><br>
     
         <label for="registration_number">Registration Number:</label>
-        <input type="text" name="registration_number" required><br>
+        <input type="text" name="registration_number" required><br><br>
     
         <label for="insurance_end_date">Insurance End Date:</label>
-        <input type="date" name="insurance_end_date" required><br>
+        <input type="date" name="insurance_end_date" required><br><br>
     
         <label for="ownership_type">Ownership Type:</label>
         <select name="ownership_type" required>
@@ -66,7 +66,7 @@
             <option value="2nd">2nd Owner</option>
             <option value="3rd">3rd Owner</option>
             <option value="4th+">4th or more Owners</option>
-        </select><br>
+        </select><br><br>
     
         <button type="submit">Add Car</button>
     </form>
