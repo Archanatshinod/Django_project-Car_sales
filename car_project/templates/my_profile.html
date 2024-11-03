@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .profile-container {
+            margin-top: 50px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            display: inline-block;
+        }
+        h1 {
+            color: blueviolet;
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            width: 200px;
+            text-align: left;
+            background-color: white;
+        }
+        .img {
+            width: 100%;
+            height: 250px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h1>User Profile</h1>
+        {% if user_profile %}
+            <img src="{{ user_profile.profile_picture.url }}" alt="Profile Picture" style="width:150px; height:auto; border-radius: 50%;">
+            <p><strong>Name:</strong> {{ user_profile.Name }}</p>
+            <p><strong>Email:</strong> {{ user_profile.Email }}</p>
+            <p><strong>Phone:</strong> {{ user_profile.Phone }}</p>
+            <p><strong>Location:</strong> <a href="{{ user_profile.my_location_link }}" target="_blank">{{ user_profile.my_location_link }}</a></p>
+            <p><strong>WhatsApp:</strong> {{ user_profile.whatsapp_number }}</p>
+        {% else %}
+            <p>No profile information available.</p>
+        {% endif %}
+    </div>
+
+    <div class="card-container">
+        <a href="{% url 'list_of_my_cars' %}"><div class="card">
+             <h3>My Cars for Sale</h3>
+         </div></a>
+         <a href="{% url 'list_of_my_cars_for_rent' %}"><div class="card">
+             <h3>My Cars for Rent</h3>
+         </div></a>
+     </div>
+        
+    </div>
+</body>
+</html>

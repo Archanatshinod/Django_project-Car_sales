@@ -6,6 +6,7 @@
     <title>Add Car for Rent</title>
 </head>
 <body>
+    <a href="{% url 'list_cars_for_rent' %}">BACK TO LIST</a>
     <h2>Add Car for Rent</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}

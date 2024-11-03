@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Detail</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            height: 500px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ car.name }}</h1>
+        <img src="{{ car.rent_car_image.url }}" alt="Car Image">
+        <p><strong>Brand:</strong> {{ car.brand.name }}</p>
+        <p><strong>Oil Type:</strong> {{ car.oil_type }}</p>
+        <p><strong>Price Per Day:</strong> {{ car.price_per_day }}</p>
+        <p><strong>Mileage:</strong> {{ car.mileage }} km/l</p>
+        <p><strong>Description:</strong> {{ car.description }}</p>
+        
+        
+        <a href="{% url 'edit_my_rent_cars' car.id %}">  <button> Edit my rent car </button> </a>
+        <a href="{% url 'delete_car_for_rent' car.id %}"> <button> Delete Car </button> </a>
+           
+       
+    </div>
+</body>
+</html>

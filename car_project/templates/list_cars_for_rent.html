@@ -3,7 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cars for Sale</title>
+    <title>Cars for Rent</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            width: 200px;
+            text-align: left;
+            background-color: white;
+        }
+        .card img {
+            width: 100%;
+            height: 200px;
+            border-radius: 5px;
+        }
+        /* Filter form styling */
+        form {
+            margin: 20px 0;
+        }
+        select, input {
+            margin: 5px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        {% if user_profile %}
+            <div style="float: right;">
+                <a href="{% url 'view_profile' %}"><h3 style="color: blueviolet;">Username: {{ user_profile.Name }}</h3></a>
+                <a href="{% url 'logout' %}" style="color: red; float: right;">Logout</a>
+            </div>
+        {% endif %}
+    </div>
+    <nav>
+        <form method="GET" action="{% url 'list_cars_for_rent' %}">
+            <input type="text" name="search" placeholder="Search by Car Name" value="{{ request.GET.search }}">
+            <select name="brand">
+                <option value="">All Brands</option>
+                {% for brand in brands %}
+                    <option value="{{ brand.name }}" {% if request.GET.brand == brand.name %}selected{% endif %}>{{ brand.name }}</option>
+                {% endfor %}
+            </select>
+            <select name="oil_type">
+                <option value="">All Oil Types</option>
+                {% for oil_type in oil_types %}
+                    <option value="{{ oil_type.oil_type }}" {% if request.GET.oil_type == oil_type.oil_type %}selected{% endif %}>{{ oil_type.oil_type }}</option>
+                {% endfor %}
+            </select>
+            <select name="price">
+                <option value="">All Prices</option>
+                <option value="below_5k" {% if request.GET.price == 'below_5k' %}selected{% endif %}>Below 5k</option>
+                <option value="5k_to_10k" {% if request.GET.price == '5k_to_10k' %}selected{% endif %}>5K-10k</option>
+                <option value="above_10k" {% if request.GET.price == 'above_10k' %}selected{% endif %}>Above 10K</option>
+            </select>
+            <button type="submit">Filter</button>
+        </form>
+    </nav>
+
+    <h1>Cars Available for Rent</h1>
+
+    {% if cars %}
+    <div class="card-container">
+        {% for car in cars %}
+        <a href="{% url 'rent_car_detail' car.id %}">
+            <div class="card">
+                <h3>{{ car.name }}</h3>
+                <p><strong>Brand:</strong> {{ car.brand.name }}</p>
+                {% if car.rent_car_image %}
+                    <img src="{{ car.rent_car_image.url }}" alt="image">
+                {% else %}
+                    <p>No Image</p>
+                {% endif %}
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p>No cars available for Rent at the moment.</p>
+    {% endif %}
+    <br><br>
+    <a href="{% url 'add_car_for_rent' %}" target="_blank">
+        <button>Add car for rent</button>
+    </a>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars for Rent</title>
     <style>
         /* Basic styling for the table */
         table {
@@ -24,15 +127,44 @@
     </style>
 </head>
 <body>
+<a href="{% url 'home_page' %}">HOME</a><br><br>
+<nav>
+    <form method="GET" action="{% url 'list_cars_for_rent' %}">
+        <input type="text" name="search" placeholder="Search by Car Name" value="{{ request.GET.search }}">
+        
+        <select name="brand">
+            <option value="">All Brands</option>
+            {% for brand in brands %}
+                <option value="{{ brand.name }}" {% if request.GET.brand == brand.name %}selected{% endif %}>{{ brand.name }}</option>
+            {% endfor %}
+        </select>
+    
+        <select name="oil_type">
+            <option value="">All Oil Types</option>
+            {% for oil_type in oil_types %}
+                <option value="{{ oil_type.oil_type }}" {% if request.GET.oil_type == oil_type.oil_type %}selected{% endif %}>{{ oil_type.oil_type }}</option>
+            {% endfor %}
+        </select>
+    
+        <select name="price">
+            <option value="">All Prices</option>
+            <option value="below_5k" {% if request.GET.price == 'below_5k' %}selected{% endif %}>Below 5k</option>
+            <option value="5k_to_10k" {% if request.GET.price == '5k_to_10k' %}selected{% endif %}>5K-10k</option>
+            <option value="above_10k" {% if request.GET.price == 'above_10L' %}selected{% endif %}>Above 10K</option>
+        </select>
+    
+        <button type="submit">Filter</button>
+    </form>
+</nav>
 
-<h1>Cars Available for Sale</h1>
+<h1>Cars Available for Rent</h1>
 
 {% if cars %}
 
     <table>
         <thead>
             <tr>
-                <th> </th>
+               <th>SLNO.</th>
                 <th>Car Name</th>
                 <th>Brand</th>
                 <th>Oil Type</th>
@@ -49,7 +181,7 @@
         <tbody>
             {% for car in cars %}
                 <tr>
-                    <td> {{car.user.Name}}</td>
+                    <td>{{ forloop.counter }}</td>
                     <td>{{ car.name }} </td>
                     <td>{{ car.brand.name }}</td>
                     <td>{{ car.oil_type }}</td>
@@ -90,4 +222,4 @@
 {% endif %}
 
 </body>
-</html>
+</html> -->

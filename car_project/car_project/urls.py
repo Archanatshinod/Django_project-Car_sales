@@ -24,12 +24,16 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin', admin.site.urls),
-
-    path('', views.user_login,name='Login'),
+    path('', views.home_page, name="home_page"),  # Default home page
+    path('login/', views.user_login, name='Login'),  # Login page
 
     path('User_registration', views.user_registration,name="User_registration"),
 
-    path('home_page', views.home_page,name="home_page"),
+    # path(' ', views.home_page,name="home_page"),
+
+    path('sale/<int:car_id>', views.sale_page,name="sale"),
+    path('rent/<int:car_id>', views.rent_page,name="rent"),
+    
 
     path('logout', views.logout, name='logout'),
 
@@ -37,13 +41,24 @@ urlpatterns = [
     path('list_cars_for_sale', views.list_cars_for_sale, name='list_cars_for_sale'),
     path('list_of_my_cars', views.list_my_cars, name='list_of_my_cars'),
 
+    # -------------------------------------------------------------------
+    path('cars/<int:car_id>/', views.car_detail, name='car_detail'),
+    path('rent_cars/<int:car_id>/', views.rent_car_detail, name='rent_car_detail'),
+
+    path('profile/', views.view_profile, name='view_profile'),
+    # -----------------------------------------------------------------------
+   
+
 
     path('add_car_for_rent', views.add_car_for_rent, name='add_car_for_rent'),
     path('list_cars_for_rent', views.list_cars_for_rent, name='list_cars_for_rent'),
     path('list_of_my_cars_for_rent', views.list_my_cars_for_rent, name='list_of_my_cars_for_rent'),
 
     path('edit_my_cars/<int:car_id>/', views.edit_my_cars, name='edit_my_cars'),
-    # path('edit_my_rent_cars', views.edit_my_rent_cars, name='edit_my_rent_cars'),
+    path('edit_my_rent_cars/<int:car_id>/', views.edit_my_rent_cars, name='edit_my_rent_cars'),
+
+    path('delete_car_for_sale/<int:car_id>/', views.delete_car_for_sale, name='delete_car_for_sale'),
+    path('delete_car_for_rent/<int:car_id>/', views.delete_car_for_rent, name='delete_car_for_rent'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

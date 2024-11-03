@@ -4,6 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Cars for Sale</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        .navbar {
+            margin-bottom: 20px;
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            width: 200px;
+            text-align: left;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+        }
+        button {
+            margin-top: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+       
+    </div>
+    <div class="container">
+        <h1>My Cars for Sale</h1>
+
+        {% if my_cars %}
+        <div class="card-container">
+            {% for car in my_cars %}
+            <a href="{% url 'sale' car.id %}"><div class="card">
+                    <h3>{{ car.name }}</h3>
+                    <p><strong>Brand:</strong> {{ car.brand.name }}</p>
+                    {% if car.front_image %}
+                        <img src="{{ car.front_image.url }}" alt="Front Image">
+                    {% else %}
+                        <p>No Image Available</p>
+                    {% endif %}
+                    
+                </div>
+            {% endfor %}
+        </div></a>
+        {% else %}
+            <p>No cars available for sale at the moment.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cars for Sale</title>
 <style>
     table {
         width: 100%;
@@ -23,6 +95,7 @@
     </style>
 </head>
 <body>
+    <a href="{% url 'home_page' %}">HOME</a><br><br>
     <div class="container">
         <h1>My Cars for Sale</h1>
 
@@ -30,6 +103,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>SLNO.</th>
                     <th>Car Name</th>
                     <th>Model Year</th>
                     <th>KM Driven</th>
@@ -50,6 +124,7 @@
             <tbody>
                 {% for car in my_cars %}
                     <tr>
+                        <td>{{ forloop.counter }}</td>
                         <td>{{ car.name }}</td>
                         <td>{{ car.model_year }}</td>
                         <td>{{ car.km_driven }} km</td>
@@ -85,7 +160,7 @@
                         <td>{{ car.ownership_type }}</td>
                         <td>{{ car.accidental_background|yesno:"Yes,No" }}</td>
                         <td> <a href="{% url 'edit_my_cars' car.id %}"><button> Edit Car </button></a> </td>
-                        <td> <button> Delete Car </button> </td>
+                        <td><a href="{% url 'delete_car_for_sale' car.id %}"> <button> Delete Car </button> </a></td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -95,4 +170,4 @@
         {% endif %}
     </div>
 </body>
-</html>
+</html> -->

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Details</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        .details {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px;
+            background-color: white;
+        }
+        img {
+            width: 200px;
+            height: auto;
+            border-radius: 5px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'list_cars_for_sale' %}">BACK TO LIST</a><br><br>
+
+    <h1>{{ car.name }} - Details</h1>
+
+    <div class="details">
+        <img src="{{ car.front_image.url }}" alt="Front Image">
+        <h3>Brand: {{ car.brand.name }}</h3>
+        <p>Model Year: {{ car.model_year }}</p>
+        <p>KM Driven: {{ car.km_driven }} km</p>
+        <p>Oil Type: {{ car.oil_type }}</p>
+        <p>Price: {{ car.price }}</p>
+        <p>Mileage: {{ car.mileage }} km/l</p>
+        <p>Description: {{ car.description }}</p>
+        <p>Registration Number: {{ car.registration_number }}</p>
+        <p>Insurance End Date: {{ car.insurance_end_date }}</p>
+        <p>Ownership Type: {{ car.ownership_type }}</p>
+        <p>Accidental Background: {{ car.accidental_background|yesno:"Yes,No" }}</p>
+
+         <a href="{% url 'edit_my_cars' car.id %}"><button> Edit Car </button></a> 
+     <a href="{% url 'delete_car_for_sale' car.id %}"> <button> Delete Car </button> </a>
+    </div>
+
+</body>
+</html>

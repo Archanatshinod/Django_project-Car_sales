@@ -72,3 +72,4 @@ class CarForRent(models.Model):
     rent_car_image = models.ImageField(upload_to='car_images/rent/', blank=True, null=True)
     created_date = models.DateField(auto_now_add=True)
     created_time = models.TimeField(auto_now_add=True)
+

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Detail</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            height: 500px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ car.name }}</h1>
+        <img src="{{ car.rent_car_image.url }}" alt="Car Image">
+        <p><strong>Brand:</strong> {{ car.brand.name }}</p>
+        <p><strong>Oil Type:</strong> {{ car.oil_type }}</p>
+        <p><strong>Price Per Day:</strong> {{ car.price_per_day }}</p>
+        <p><strong>Mileage:</strong> {{ car.mileage }} km/l</p>
+        <p><strong>Description:</strong> {{ car.description }}</p>
+        
+        <a href="{{ car.user.my_location_link }}" target="_blank">
+            <button>Find Owner Location</button>
+        </a>
+        <a 
+            href="https://wa.me/{{ car.user.Phone }}?text=Hi%20{{ car.user.Name }}%2C%20I'm%20interested%2C%20please%20share%20more%20details%20about%20this%20{{ car.name }}."
+            class="whatsapp-button"
+            target="_blank">
+            <button>Chat with WhatsApp</button>
+        </a>
+        <a 
+            href="https://vahan.parivahan.gov.in/vahanservice/vahan/ui/home.html" 
+            class="mparivahan-button" 
+            target="_blank">
+            <button>Verify with mParivahan</button>
+        </a>
+    </div>
+</body>
+</html>

@@ -6,6 +6,7 @@
     <title>Add Car for Sale</title>
 </head>
 <body>
+    <a href="{% url 'list_cars_for_sale' %}">BACK TO LIST</a>
     <h2>Add Car for Sale</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}

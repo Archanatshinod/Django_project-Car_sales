@@ -4,6 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Cars for Rent</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 300px;
+            text-align: center;
+            padding: 15px;
+            background-color: #f9f9f9;
+            transition: box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .card h3 {
+            margin: 10px 0 5px;
+        }
+        .card p {
+            color: #555;
+        }
+        .card:hover {
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    
+        <h1>My Cars for Rent</h1><br>
+        <div class="container">
+        {% if my_cars %}
+            {% for car in my_cars %}
+                <a href="{% url 'rent' car.id %}" class="card-link">
+                    <div class="card">
+                        {% if car.rent_car_image %}
+                            <img src="{{ car.rent_car_image.url }}" alt="{{ car.name }}">
+                        {% else %}
+                            <p>No Image Available</p>
+                        {% endif %}
+                        <h3>{{ car.name }}</h3>
+                        <p><strong>Brand:</strong> {{ car.brand.name }}</p>
+                    </div>
+                </a>
+            {% endfor %}
+        {% else %}
+            <p>No cars available for rent at the moment.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cars for Rent</title>
 <style>
     table {
         width: 100%;
@@ -23,6 +95,7 @@
     </style>
 </head>
 <body>
+    
     <div class="container">
         <h1>My Cars for Rent</h1>
 
@@ -30,6 +103,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>SLNO.</th>
                     <th>Car Name</th>
                     
                     <th>Brand</th>
@@ -45,6 +119,7 @@
             <tbody>
                 {% for car in my_cars %}
                     <tr>
+                        <td>{{ forloop.counter }}</td>
                         <td>{{ car.name }}</td>
                         <td>{{ car.brand.name }}</td>
                         <td>{{ car.oil_type }}</td>
@@ -58,8 +133,8 @@
                                 <p>No Image</p>
                             {% endif %}
                         </td>
-                        <td><a href="{% url 'edit_my_rent_cars' %}">  <button> Edit Car </button> </a></td>
-                        <td> <button> Delete Car </button> </td>
+                        <td><a href="{% url 'edit_my_rent_cars' car.id %}">  <button> Edit Car </button> </a></td>
+                        <td><a href="{% url 'delete_car_for_rent' car.id %}"> <button> Delete Car </button> </a> </td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -69,4 +144,4 @@
         {% endif %}
     </div>
 </body>
-</html>
+</html> -->
