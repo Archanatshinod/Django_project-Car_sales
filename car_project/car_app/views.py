@@ -96,7 +96,7 @@ def logout(request):
 #--------------------------------------ADD CAR FOR SALE---------------------------------------------------
 
 def add_car_for_sale(request):
-    # Check if the user is logged in
+
     user_id = request.session.get('user_id')
     if not user_id:
         return HttpResponse('''<script>alert("You are not logged in!"); window.location="/car_project/Login/"</script>''')
@@ -106,12 +106,12 @@ def add_car_for_sale(request):
         return HttpResponse('''<script>alert("User does not exist!"); window.location="/car_project/Login/"</script>''')
 
     if request.method == 'POST':
-        # Extract form data
+        
         name = request.POST.get('name')
         model_year = request.POST.get('model_year')
         km_driven = request.POST.get('km_driven')
-        brand_name = request.POST.get('brand')  # Get brand name from input
-        oil_type_name = request.POST.get('oil_type')  # Get the selected oil type
+        brand_name = request.POST.get('brand') 
+        oil_type_name = request.POST.get('oil_type') 
         accidental_background = request.POST.get('accidental_background') == 'True'
         description = request.POST.get('description')
         price = request.POST.get('price')
@@ -124,20 +124,20 @@ def add_car_for_sale(request):
         insurance_end_date = request.POST.get('insurance_end_date')
         ownership_type = request.POST.get('ownership_type')
 
-        # Create or get the brand
+       
         brand, created = Brand.objects.get_or_create(name=brand_name)
 
-        # Check if the oil type already exists
+        
         oil_type, created = OilType.objects.get_or_create(oil_type=oil_type_name)
 
-        # Create a new CarForSale instance
+        
         car = CarForSale(
             user=user_instance,
             name=name,
             model_year=model_year,
             km_driven=km_driven,
-            brand=brand,  # Assign the brand object
-            oil_type=oil_type,  # Use the oil_type object to link to OilType
+            brand=brand,  
+            oil_type=oil_type, 
             accidental_background=accidental_background,
             description=description,
             price=price,
@@ -151,7 +151,7 @@ def add_car_for_sale(request):
             ownership_type=ownership_type
         )
         car.save()
-        return redirect('home_page')  # Redirect to the appropriate page
+        return redirect('home_page')  
 
     return render(request, 'add_car_for_sale.html')
 
@@ -177,7 +177,7 @@ def list_my_cars(request):
 # ------------------------- ADD CAR FOR RENT-------------------------------------------------
 
 def add_car_for_rent(request):
-    # Check if the user is logged in
+    
     user_id = request.session.get('user_id')
     if not user_id:
         return HttpResponse('''<script>alert("You are not logged in!"); window.location="/car_project/Login/"</script>''')
@@ -187,34 +187,30 @@ def add_car_for_rent(request):
         return HttpResponse('''<script>alert("User does not exist!"); window.location="/car_project/Login/"</script>''')
 
     if request.method == 'POST':
-        # Extract form data
         name = request.POST.get('name')
-        brand_name = request.POST.get('brand')  # Get brand name from input
-        oil_type_name = request.POST.get('oil_type')  # Get the selected oil type
+        brand_name = request.POST.get('brand')  
+        oil_type_name = request.POST.get('oil_type') 
         description = request.POST.get('description')
         price_per_day = request.POST.get('price_per_day')
         mileage = request.POST.get('mileage')
         rent_car_image = request.FILES.get('rent_car_image')
 
-        # Create or get the brand
         brand, created = Brand.objects.get_or_create(name=brand_name)
 
-        # Check if the oil type already exists
         oil_type, created = OilType.objects.get_or_create(oil_type=oil_type_name)
 
-        # Create a new CarForSale instance
         car = CarForRent(
             user=user_instance,
             name=name,
-            brand=brand,  # Assign the brand object
-            oil_type=oil_type,  # Use the oil_type object to link to OilType
+            brand=brand,  
+            oil_type=oil_type,  
             description=description,
             price_per_day=price_per_day,
             mileage=mileage,
             rent_car_image=rent_car_image,
         )
         car.save()
-        return redirect('home_page')  # Redirect to the appropriate page
+        return redirect('home_page') 
 
     return render(request, 'add_car_for_rent.html')
 
@@ -239,28 +235,85 @@ def list_my_cars_for_rent(request):
 
 #---------------------------------EDIT MY CARS FOR SALE-------------------------------------------
 
-def edit_my_cars(request):
-    car=CarForSale.objects.filter()
-    return render(request,'edit_my_cars.html')
 
+
+from django.http import HttpResponseNotFound,HttpResponseBadRequest
+
+
+def edit_my_cars(request, car_id):
+    try:
+        car = CarForSale.objects.get(id=car_id)
+        print("Editing car with ID:", car)
+        print(car.front_image)
+    except CarForSale.DoesNotExist:
+        return HttpResponseNotFound("Car not found")
+
+    if request.method == 'POST':
+        car.name = request.POST.get('name')
+        car.model_year = request.POST.get('model_year')
+        car.km_driven = request.POST.get('km_driven')
+
+        # Get brand and oil type by ID
+        brand_id = request.POST.get('brand')
+        oil_type_id = request.POST.get('oil_type')
+        car.brand = Brand.objects.get(id=brand_id) if brand_id else car.brand
+        car.oil_type = OilType.objects.get(id=oil_type_id) if oil_type_id else car.oil_type
+
+        car.accidental_background = request.POST.get('accidental_background') == 'True'
+        car.description = request.POST.get('description')
+        car.price = request.POST.get('price')
+        car.mileage = request.POST.get('mileage')
+
+        car.front_image = request.FILES.get('front_image', car.front_image)
+        car.leftside_img = request.FILES.get('leftside_img', car.leftside_img)
+        car.rightside_img = request.FILES.get('rightside_img', car.rightside_img)
+        car.back_image = request.FILES.get('back_image', car.back_image)
+
+
+        car.registration_number = request.POST.get('registration_number')
+        car.insurance_end_date = request.POST.get('insurance_end_date')
+        car.ownership_type = request.POST.get('ownership_type')
+        car.save()
+
+        
+        return redirect('home_page')  # Or redirect to a specific success page
+
+    # Populate the form with existing car data for editing
+    brands = Brand.objects.all()
+    oil_types = OilType.objects.all()
+    context = {
+        'car': car,
+        'brands': brands,
+        'oil_types': oil_types,
+    }
+
+    print("Front Image URL:", car.front_image.url if car.front_image else "No Image")
+    print("Left Side Image URL:", car.leftside_img.url if car.leftside_img else "No Image")
+    print("Right Side Image URL:", car.rightside_img.url if car.rightside_img else "No Image")
+    print("Back Image URL:", car.back_image.url if car.back_image else "No Image")
+    return render(request, 'edit_my_cars.html', context)
+
+       
+
+   
 
 #---------------------------------EDIT MY CARS FOR RENT -------------------------------------------
 
-def edit_my_rent_cars(request):
-    return render(request,'edit_my_rent_cars.html')
+# def edit_my_rent_cars(request):
+#     return render(request,'edit_my_rent_cars.html')
 
 
 #-------------------------------FILTER------------------------------------------------------------
 
 from django.utils import timezone
 def list_cars_for_sale(request):
-    # Start with all cars
+    
     cars = CarForSale.objects.all()
 
-    # Get current year
+    
     current_year = timezone.now().year
 
-    # Get filter parameters from the request
+    
     brand_filter = request.GET.get('brand')
     year_filter = request.GET.get('year')
     km_filter = request.GET.get('km')
@@ -268,7 +321,7 @@ def list_cars_for_sale(request):
     price_filter = request.GET.get('price')
     search_filter = request.GET.get('search')  
 
-    # Apply filters based on user selections
+    
     if brand_filter:
         print("Brand Filter:", brand_filter)  
         cars = cars.filter(brand__name__iexact=brand_filter)
@@ -309,17 +362,18 @@ def list_cars_for_sale(request):
         elif price_filter == 'above_10L':
             cars = cars.filter(price__gt=1000000)
 
-    # Get all available brands and oil types for the filters
+
     brands = Brand.objects.all()
     oil_types = OilType.objects.all()
 
     if search_filter:
-        cars = cars.filter(name__icontains=search_filter)  # Assuming 'name' is the field for the car name
+        cars = cars.filter(name__icontains=search_filter)  
 
 
-    # Render the template with filtered cars and available brands and oil types
     return render(request, 'list_cars_for_sale.html', {
         'cars': cars,
         'brands': brands,
         'oil_types': oil_types
     })
+
+

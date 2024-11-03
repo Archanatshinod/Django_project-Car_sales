@@ -84,7 +84,7 @@
                         <td>{{ car.insurance_end_date }}</td>
                         <td>{{ car.ownership_type }}</td>
                         <td>{{ car.accidental_background|yesno:"Yes,No" }}</td>
-                        <td> <a href="{% url 'edit_my_cars' %}"><button> Edit Car </button></a> </td>
+                        <td> <a href="{% url 'edit_my_cars' car.id %}"><button> Edit Car </button></a> </td>
                         <td> <button> Delete Car </button> </td>
                     </tr>
                 {% endfor %}

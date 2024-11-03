@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Car for Sale</title>
+    <title>Edit Car for Sale</title>
 </head>
 <body>
     <h2>Edit My Car for Sale</h2>
@@ -11,64 +11,89 @@
         {% csrf_token %}
         
         <label for="name">Car Name:</label>
-        <input type="text" name="name" required><br><br>
+        <input type="text" name="name" value="{{ car.name }}" required><br><br>
     
         <label for="model_year">Model Year:</label>
-        <input type="number" name="model_year" required><br><br>
+        <input type="number" name="model_year" value="{{ car.model_year }}" required><br><br>
     
         <label for="km_driven">Kilometers Driven:</label>
-        <input type="number" name="km_driven" required><br><br>
+        <input type="number" name="km_driven" value="{{ car.km_driven }}" required><br><br>
     
         <label for="brand">Brand:</label>
-        <input type="text" name="brand" required><br><br>
+        <select name="brand">
+            {% for brand in brands %}
+                <option value="{{ brand.id }}" {% if car.brand.id == brand.id %}selected{% endif %}>{{ brand.name }}</option>
+            {% endfor %}
+        </select><br><br>
 
         <label for="oil_type">Oil Type:</label>
-        <select name="oil_type" required>
-            <option value="Petrol">Petrol</option>
-            <option value="Diesel">Diesel</option>
-            <option value="Electric">Electric</option>
+        <select name="oil_type">
+            {% for oil in oil_types %}
+                <option value="{{ oil.id }}" {% if car.oil_type.id == oil.id %}selected{% endif %}>{{ oil.oil_type }}</option>
+            {% endfor %}
         </select><br><br>
 
         <label for="accidental_background">Accidental Background:</label>
-        <input type="radio" name="accidental_background" value="True" required> Yes
-        <input type="radio" name="accidental_background" value="False" required> No<br><br>
+        <input type="radio" name="accidental_background" value="True" {% if car.accidental_background %}checked{% endif %} required> Yes
+        <input type="radio" name="accidental_background" value="False" {% if not car.accidental_background %}checked{% endif %} required> No<br><br>
 
         <label for="description">Description:</label>
-        <textarea name="description" rows="4" cols="50"></textarea><br><br>
+        <textarea name="description" rows="4" cols="50">{{ car.description }}</textarea><br><br>
     
         <label for="price">Price:</label>
-        <input type="number" name="price" step="0.01" required><br><br>
+        <input type="number" name="price" step="0.01" value="{{ car.price }}" required><br><br>
     
         <label for="mileage">Mileage:</label>
-        <input type="number" name="mileage" step="0.01" required><br><br>
-    
+        <input type="number" name="mileage" step="0.01" value="{{ car.mileage }}" required><br><br>
+
         <label for="front_image">Front Image:</label>
-        <input type="file" name="front_image" accept="image/*"><br><br>
-    
+        <input type="file" name="front_image" accept="image/*">
+        {% if car.front_image %}
+            <p>Current:</p>
+            <img src="{{ car.front_image.url }}" alt="Front Image" width="100">
+        {% endif %}
+        <br><br>
+
         <label for="leftside_img">Left Side Image:</label>
-        <input type="file" name="leftside_img" accept="image/*"><br><br>
-    
+        <input type="file" name="leftside_img" accept="image/*">
+        {% if car.leftside_img %}
+            <p>Current:</p>
+            <img src="{{ car.leftside_img.url }}" alt="Left Side Image" width="100">
+        {% endif %}
+        <br><br>
+
         <label for="rightside_img">Right Side Image:</label>
-        <input type="file" name="rightside_img" accept="image/*"><br><br>
-    
+        <input type="file" name="rightside_img" accept="image/*">
+        {% if car.rightside_img %}
+            <p>Current:</p>
+            <img src="{{ car.rightside_img.url }}" alt="Right Side Image" width="100">
+        {% endif %}
+        <br><br>
+
         <label for="back_image">Back Image:</label>
-        <input type="file" name="back_image" accept="image/*"><br><br>
-    
+        <input type="file" name="back_image" accept="image/*">
+        {% if car.back_image %}
+            <p>Current:</p>
+            <img src="{{ car.back_image.url }}" alt="Back Image" width="100">
+        {% endif %}
+        <br><br>
+
+
         <label for="registration_number">Registration Number:</label>
-        <input type="text" name="registration_number" required><br><br>
+        <input type="text" name="registration_number" value="{{ car.registration_number }}" required><br><br>
     
         <label for="insurance_end_date">Insurance End Date:</label>
-        <input type="date" name="insurance_end_date" required><br><br>
+        <input type="date" name="insurance_end_date" value="{{ car.insurance_end_date|date:'Y-m-d' }}" required><br><br>
     
         <label for="ownership_type">Ownership Type:</label>
         <select name="ownership_type" required>
-            <option value="1st">1st Owner</option>
-            <option value="2nd">2nd Owner</option>
-            <option value="3rd">3rd Owner</option>
-            <option value="4th+">4th or more Owners</option>
+            <option value="1st" {% if car.ownership_type == '1st' %}selected{% endif %}>1st Owner</option>
+            <option value="2nd" {% if car.ownership_type == '2nd' %}selected{% endif %}>2nd Owner</option>
+            <option value="3rd" {% if car.ownership_type == '3rd' %}selected{% endif %}>3rd Owner</option>
+            <option value="4th+" {% if car.ownership_type == '4th+' %}selected{% endif %}>4th or more Owners</option>
         </select><br><br>
     
-        <button type="submit">Add Car</button>
+        <button type="submit">Save Changes</button>
     </form>
 </body>
 </html>

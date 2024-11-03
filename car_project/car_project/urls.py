@@ -42,8 +42,8 @@ urlpatterns = [
     path('list_cars_for_rent', views.list_cars_for_rent, name='list_cars_for_rent'),
     path('list_of_my_cars_for_rent', views.list_my_cars_for_rent, name='list_of_my_cars_for_rent'),
 
-    path('edit_my_cars.html', views.edit_my_cars, name='edit_my_cars'),
-    path('edit_my_rent_cars.html', views.edit_my_rent_cars, name='edit_my_rent_cars'),
+    path('edit_my_cars/<int:car_id>/', views.edit_my_cars, name='edit_my_cars'),
+    # path('edit_my_rent_cars', views.edit_my_rent_cars, name='edit_my_rent_cars'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
