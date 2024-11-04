@@ -1,19 +1,27 @@
 <!-- LOGIN -->
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Project</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Julius Sans One">
 </head>
 <body>
-    <div class="login" style="text-align: center;">
-        {% if messages %}
+    <nav class="navbar sticky-top bg-body-tertiary">
+        <div class="navbar-container">
+            <a href="{% url 'home_page' %}" class="navbar-link">Back to home</a>
+        </div>
+    </nav>
+<div class="main">
+    <div class="login">
+        <!-- {% if messages %}
             {% for message in messages %}
                 <div style="color: green;">{{ message }}</div>
             {% endfor %}
-        {% endif %}
+        {% endif %} -->
         <h4>LOGIN</h4>
         <form method="post">
             {% csrf_token %}
@@ -24,20 +32,22 @@
                 <label class="l" for="password">Password: </label>
                 <input type="password" name="password" class="form-control" id="passwordField" placeholder="Enter your password" required><br><br>
                 <div>
-                    <button type="submit">LOGIN</button><br><br>
-                    <div class="ack">Don't have an account? <a href="{% url 'User_registration' %}">Register</a></div>
+                    <div class="add-car-button-container">
+                    <button type="submit">LOGIN</button></div><br><br>
+                    <div class="ack">Don't have an account? <a href="{% url 'User_registration' %}" class="register">Register</a></div>
                 </div>
             </div>
         </form>
         
-        {% if message %}
+        <!-- {% if message %}
           <p style="color: green;">{{ message }}</p>
           {% endif %}
         {% if error %}
               <p style="color: red;">{{ error }}</p>
         {% endif %}
-            
+             -->
     </div>
+</div>
 </body>
 </html>
 

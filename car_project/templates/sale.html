@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Details</title>
-    <style>
+    <!-- <style>
         body {
             text-align: center;
         }
@@ -24,15 +25,26 @@
             margin: 5px;
             padding: 10px;
         }
-    </style>
+    </style> -->
+     <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Julius Sans One">
 </head>
 <body>
-    <a href="{% url 'list_cars_for_sale' %}">BACK TO LIST</a><br><br>
+    <nav class="navbar sticky-top bg-body-tertiary">
+        <div class="navbar-container">
+            <a href="{% url 'list_of_my_cars' %}" class="navbar-link">Back to car list</a>
+        </div>
+    </nav>
 
-    <h1>{{ car.name }} - Details</h1>
+    <h1>{{ car.name }}</h1>
 
     <div class="details">
-        <img src="{{ car.front_image.url }}" alt="Front Image">
+        <div class="container">
+        <img src="{{ car.front_image.url }}" alt="Front Image"><br>
+        <img src="{{ car.leftside_img.url }}" alt="Left side Image"><br>
+        <img src="{{ car.rightside_img.url }}" alt="Right side Image"><br>
+        <img src="{{ car.back_image.url }}" alt="Back Image"><br>
+
         <h3>Brand: {{ car.brand.name }}</h3>
         <p>Model Year: {{ car.model_year }}</p>
         <p>KM Driven: {{ car.km_driven }} km</p>
@@ -44,10 +56,10 @@
         <p>Insurance End Date: {{ car.insurance_end_date }}</p>
         <p>Ownership Type: {{ car.ownership_type }}</p>
         <p>Accidental Background: {{ car.accidental_background|yesno:"Yes,No" }}</p>
-
+        <div class="add-car-button-container">
          <a href="{% url 'edit_my_cars' car.id %}"><button> Edit Car </button></a> 
      <a href="{% url 'delete_car_for_sale' car.id %}"> <button> Delete Car </button> </a>
-    </div>
-
+    </div></div>
+</div>
 </body>
 </html>

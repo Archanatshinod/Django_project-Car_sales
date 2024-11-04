@@ -1,0 +1,263 @@
+body,input,select,button,textarea{
+    font-family: 'Julius Sans One';
+}
+/* navbar */
+.navbar {
+    background-color: black; /* Light background color */
+    padding: 20px 20px; /* Padding for the navbar */
+    color: white;
+}
+
+.navbar-container {
+    display: flex;
+    /* justify-content: flex-end; Aligns the links to the right */
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.navbar-link {
+    color: white;
+    text-decoration: none; /* Removes underline */
+    padding: 8px 15px; /* Padding for the link */
+    text-align: end;
+}
+
+.navbar-link:hover {
+    background-color: rgba(0, 128, 0, 0.1); /* Adds a hover effect */
+    border-radius: 4px; /* Rounds the corners of the hover effect */
+}
+/* ----------------------------------------- */
+
+h1 {
+    font-weight: 900; /* Set to a heavier weight */
+    font-size: 3.5rem; /* Adjust this value as necessary for your design */
+    width: 100%;
+    text-align: center; /* Centers the text */
+}
+
+a{
+    text-decoration: none;
+    font-weight: 600;
+}
+button{
+    background-color: black;
+    color: white;
+    border-radius: 30px;
+    width: 30%;
+    height: auto;
+    padding: 5px;
+}
+
+/* cards */
+.content .card-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+.content .card {
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    width: 200px;
+    height: max-content;
+    cursor: pointer; 
+    color: white;
+}
+
+/* prompt */
+.popup {
+    display: none; 
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    /* background-color: white; */
+    border: 1px solid black;
+    padding: 20px;
+    z-index: 1000; 
+}
+.overlay {
+    display: none; 
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 500; 
+}
+
+/* home page */
+
+.main {
+    background-image: url('../images/cars.jpeg'); /* Adjust the path as needed */
+    background-size: cover; /* This makes the background cover the entire area */
+    background-position: center; /* Centers the background image */
+    height: 100vh; /* Sets the height of the main area */
+    color: white; /* Optional: Change text color for better contrast */
+    display: flex; /* Optional: Use flexbox for centering content */
+    flex-direction: column; /* Optional: Align children in a column */
+    justify-content: flex-start; /* Start from the top */
+    align-items: center; /* Center horizontally */
+    text-align: center;
+    padding-top: 50px; /* Adjust padding as needed to move content down */
+}
+
+.content{
+    width: 100%;
+}
+
+/* login */
+
+.login,.registration{
+    background-color: white;
+    color: black;
+    margin-top: 50px;
+    width: 50%;
+    padding: 60px;
+    justify-content: center; /* Start from the top */
+    align-items: center; /* Center horizontally */
+    text-align: center;
+    border-radius: 27px;
+    border: rgba(0, 0, 0, 0.507) 3px solid;
+}
+
+
+/* list sales cars */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card {
+    border: 1px solid #ddd; /* Border around the card */
+    border-radius: 5px;
+    padding: 10px;
+    width: 250px; /* Fixed width */
+    height: 300px; /* Fixed height */
+    text-align: center; /* Center align text */
+    background-color: black;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
+    display: flex; /* Enables flex properties for children */
+    flex-direction: column; /* Align children in a column */
+    justify-content: space-between; /* Distributes space evenly between items */
+}
+
+.card img {
+    width: 100%; /* Ensures image fills the card width */
+    height: 200px; /* Maintains image aspect ratio */
+    border-radius: 5px;
+}
+
+.card h3 {
+    margin: 10px 0; /* Adds margin to the heading */
+}
+
+.card p {
+    margin: 0; /* Removes default margin */
+}
+
+form {
+    margin: 20px 0;
+}
+select, input {
+    margin: 5px;
+    padding: 5px;
+}
+.filter{
+    background-color: black;
+    color: white;
+    font-weight: 800;
+    border-radius: 10px;
+    width: 60px;
+    height: auto;
+    padding: 5px;
+    border: white 1px solid;
+}
+.add-car-button-container {
+    display: flex;            /* Use Flexbox */
+    justify-content: center;  /* Center horizontally */
+    margin-top: 20px;   
+    gap: 20px;     /* Optional: Add some spacing from the top */
+}
+
+.add-car-button-container button {
+    padding: 10px 20px;      /* Add padding for a better button appearance */
+    background-color: black;   /* Optional: Change button color */
+    color: white;             /* Optional: Change text color */
+    border: none;             /* Remove border */
+    border-radius: 5px;      /* Optional: Add rounded corners */
+    cursor: pointer;          /* Change cursor on hover */
+    font-size: 16px; 
+    width:fit-content         /* Optional: Increase font size */
+
+}
+.details{
+    display: flex;
+    justify-content: center;
+}
+
+/* profile */
+
+.profile-container {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    border: 2px solid rgb(34, 32, 32);
+    border-radius: 5px;
+    background-color: white;
+    display: inline-block;
+    .img {
+        width: 100%;
+        height: 300px;
+        border-radius: 2px;
+    }
+}
+
+.details .container {
+    max-width: 800px;
+    /* margin: 20px auto; */
+    /* height: 500px; */
+    /* border: 1px solid #ddd; */
+    /* border-radius: 5px; */
+    padding: 20px;
+    /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); */
+}
+
+.container img {
+    max-width: 100%;
+    height: auto;
+}
+
+.add,.edit{
+    background-color: white;
+    color: black;
+    /* margin-top: 50px; */
+    width: 50%;
+    /* padding-left: 35%; */
+    justify-content: center; /* Start from the top */
+    align-items: center; /* Center horizontally */
+    text-align: center;
+    /* border-radius: 27px;
+    border: rgba(0, 0, 0, 0.507) 3px solid; */
+}
+
+.add-edit{
+    color: black; /* Optional: Change text color for better contrast */
+    display: flex; /* Optional: Use flexbox for centering content */
+    flex-direction: column; /* Optional: Align children in a column */
+    justify-content: center; /* Start from the top */
+    align-items: center; /* Center horizontally */
+    text-align: center;
+    padding-top: 20px; 
+}
+
+.register{
+    color:brown;
+}

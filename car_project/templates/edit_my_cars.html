@@ -1,12 +1,22 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Car for Sale</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Julius Sans One">
 </head>
 <body>
+    <nav class="navbar sticky-top bg-body-tertiary">
+        <div class="navbar-container">
+            <a href="{% url 'list_of_my_cars_for_rent' %}" class="navbar-link">Back to car list</a>
+        </div>
+    </nav>
+    <div class="add-edit">
     <h2>Edit My Car for Sale</h2>
+    <div class="add">
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         
@@ -37,7 +47,7 @@
         <input type="radio" name="accidental_background" value="True" {% if car.accidental_background %}checked{% endif %} required> Yes
         <input type="radio" name="accidental_background" value="False" {% if not car.accidental_background %}checked{% endif %} required> No<br><br>
 
-        <label for="description">Description:</label>
+        <label for="description">Description:</label><br><br>
         <textarea name="description" rows="4" cols="50">{{ car.description }}</textarea><br><br>
     
         <label for="price">Price:</label>
@@ -92,8 +102,9 @@
             <option value="3rd" {% if car.ownership_type == '3rd' %}selected{% endif %}>3rd Owner</option>
             <option value="4th+" {% if car.ownership_type == '4th+' %}selected{% endif %}>4th or more Owners</option>
         </select><br><br>
-    
-        <button type="submit">Save Changes</button>
+        <div class="add-car-button-container">
+        <button type="submit">Save Changes</button></div>
     </form>
+</div></div>
 </body>
 </html>

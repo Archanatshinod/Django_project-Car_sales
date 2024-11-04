@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Cars for Rent</title>
-    <style>
+    <!-- <style>
         body{
             text-align: center;
         }
@@ -40,23 +41,30 @@
         .card:hover {
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
-    </style>
+    </style> -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Julius Sans One">
 </head>
 <body>
-    
+    <nav class="navbar sticky-top bg-body-tertiary">
+        <div class="navbar-container">
+            <a href="{% url 'view_profile' %}" class="navbar-link">Back to profile</a>
+        </div>
+    </nav>
+
         <h1>My Cars for Rent</h1><br>
-        <div class="container">
         {% if my_cars %}
+        <div class="card-container">
             {% for car in my_cars %}
-                <a href="{% url 'rent' car.id %}" class="card-link">
+                <a href="{% url 'rent' car.id %}">
                     <div class="card">
+                    <h3>{{ car.name }}</h3>
+                        <p><strong>Brand:</strong> {{ car.brand.name }}</p>
                         {% if car.rent_car_image %}
                             <img src="{{ car.rent_car_image.url }}" alt="{{ car.name }}">
                         {% else %}
                             <p>No Image Available</p>
                         {% endif %}
-                        <h3>{{ car.name }}</h3>
-                        <p><strong>Brand:</strong> {{ car.brand.name }}</p>
                     </div>
                 </a>
             {% endfor %}
@@ -64,6 +72,8 @@
             <p>No cars available for rent at the moment.</p>
         {% endif %}
     </div>
+
+
 </body>
 </html>
 

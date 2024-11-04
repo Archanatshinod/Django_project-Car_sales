@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Cars for Sale</title>
-    <style>
+    <!-- <style>
         body {
             text-align: center;
         }
@@ -34,13 +35,17 @@
             margin-top: 10px;
             width: 100%;
         }
-    </style>
+    </style> -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Julius Sans One">
 </head>
 <body>
-    <div class="navbar">
-       
-    </div>
-    <div class="container">
+    <nav class="navbar sticky-top bg-body-tertiary">
+        <div class="navbar-container">
+            <a href="{% url 'view_profile' %}" class="navbar-link">Back to profile</a>
+        </div>
+    </nav>
+    
         <h1>My Cars for Sale</h1>
 
         {% if my_cars %}
@@ -61,7 +66,7 @@
         {% else %}
             <p>No cars available for sale at the moment.</p>
         {% endif %}
-    </div>
+    
 </body>
 </html>
 

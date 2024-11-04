@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Detail</title>
-    <style>
+    <!-- <style>
         body {
             text-align: center;
         }
@@ -22,10 +23,20 @@
             height: auto;
         }
        
-    </style>
+    </style> -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Julius Sans One">
 </head>
 <body>
+    <nav class="navbar sticky-top bg-body-tertiary">
+        <div class="navbar-container">
+            <a href="{% url 'list_of_my_cars_for_rent' %}" class="navbar-link">Back to car list</a>
+        </div>
+    </nav>
+
+    <div class="details">
     <div class="container">
+        
         <h1>{{ car.name }}</h1>
         <img src="{{ car.rent_car_image.url }}" alt="Car Image">
         <p><strong>Brand:</strong> {{ car.brand.name }}</p>
@@ -34,9 +45,11 @@
         <p><strong>Mileage:</strong> {{ car.mileage }} km/l</p>
         <p><strong>Description:</strong> {{ car.description }}</p>
         
-        
+        <div class="add-car-button-container">
         <a href="{% url 'edit_my_rent_cars' car.id %}">  <button> Edit my rent car </button> </a>
         <a href="{% url 'delete_car_for_rent' car.id %}"> <button> Delete Car </button> </a>
+    </div>
+</div>
            
        
     </div>

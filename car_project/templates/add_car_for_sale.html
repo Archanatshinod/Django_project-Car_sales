@@ -1,13 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Car for Sale</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Julius Sans One">
 </head>
 <body>
-    <a href="{% url 'list_cars_for_sale' %}">BACK TO LIST</a>
+    <nav class="navbar sticky-top bg-body-tertiary">
+        <div class="navbar-container">
+            <a href="{% url 'list_cars_for_sale' %}" class="navbar-link">Back To List of cars</a>
+        </div>
+    </nav>
+
+   <div class="add-edit">
     <h2>Add Car for Sale</h2>
+    <div class="add">
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         
@@ -68,8 +78,10 @@
             <option value="3rd">3rd Owner</option>
             <option value="4th+">4th or more Owners</option>
         </select><br><br>
-    
-        <button type="submit">Add Car</button>
+        <div class="add-car-button-container">
+        <button type="submit">Add Car</button></div>
     </form>
+</div>
+</div>
 </body>
 </html>

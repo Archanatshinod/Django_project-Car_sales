@@ -10,10 +10,10 @@ from django.contrib.auth import get_user
 
 
 # -----------------------------------------------------LOGIN------------------------------------------
-# views.py
+
 
 from django.shortcuts import render, redirect
-from .models import Login  # Assuming Login is your custom user model
+
 
 def user_login(request):
     if request.method == 'POST':
@@ -21,18 +21,17 @@ def user_login(request):
         password = request.POST.get('password')
 
         try:
-            # Query the Login model to authenticate the user
+            
             user = Login.objects.get(Username=username, Password=password)
             
-            # Set user information in the session
+           
             request.session['user_id'] = user.id
             request.session['username'] = user.Username
 
-            # Check if there's a 'next' parameter in the request
-            next_url = request.GET.get('next', 'home_page')  # Default to home_page if not set
+           
+            next_url = request.GET.get('next', 'home_page')  
             print(next_url)
-            return redirect(next_url)  # Redirect to the target page
-            
+            return redirect(next_url)  
         except Login.DoesNotExist:
             return render(request, 'login.html', {'error': 'Invalid username or password'})
 
@@ -150,7 +149,7 @@ def add_car_for_sale(request):
             ownership_type=ownership_type
         )
         car.save()
-        return redirect('home_page')  
+        return redirect('list_cars_for_sale')  
 
     return render(request, 'add_car_for_sale.html')
 
@@ -163,10 +162,10 @@ def add_car_for_sale(request):
 #------------------------------LIST OF MY CARS ----------------------------------------
 
 def list_my_cars(request):
-    user_id = request.session.get('user_id')  # Retrieve the user ID from the session
+    user_id = request.session.get('user_id') 
 
     if not user_id:
-        return redirect('login')  # Redirect to login page if user is not logged in
+        return redirect('login')  
 
     my_cars = CarForSale.objects.filter(user_id=user_id)
     return render(request, 'list_my_cars.html', {'my_cars': my_cars})
@@ -209,7 +208,7 @@ def add_car_for_rent(request):
             rent_car_image=rent_car_image,
         )
         car.save()
-        return redirect('home_page') 
+        return redirect('list_cars_for_rent') 
 
     return render(request, 'add_car_for_rent.html')
 
@@ -217,10 +216,10 @@ def add_car_for_rent(request):
 #---------------------------LIST OF CARS FOR RENT ----------------------------------------
 
 # def list_cars_for_rent(request):
-#     user_id = request.session.get('user_id')  # Retrieve the user ID from the session
+#     user_id = request.session.get('user_id')  
 
 #     if not user_id:
-#         return redirect('login')  # Redirect to login page if user is not logged in
+#         return redirect('login')  
 
 #     my_cars = CarForRent.objects.filter(user_id=user_id)
 #     return render(request, 'list_cars_for_rent.html', {'cars': my_cars})
@@ -228,10 +227,10 @@ def add_car_for_rent(request):
 #------------------------------LIST OF MY CARS FOR RENT ----------------------------------------
 
 def list_my_cars_for_rent(request):
-    user_id = request.session.get('user_id')  # Retrieve the user ID from the session
+    user_id = request.session.get('user_id')  
 
     if not user_id:
-        return redirect('login')  # Redirect to login page if user is not logged in
+        return redirect('login')  
 
     my_cars = CarForRent.objects.filter(user_id=user_id)
     return render(request, 'list_my_cars_for_rent.html', {'my_cars': my_cars})
@@ -257,7 +256,6 @@ def edit_my_cars(request, car_id):
         car.model_year = request.POST.get('model_year')
         car.km_driven = request.POST.get('km_driven')
 
-        # Get brand and oil type by ID
         brand_id = request.POST.get('brand')
         oil_type_id = request.POST.get('oil_type')
         car.brand = Brand.objects.get(id=brand_id) if brand_id else car.brand
@@ -280,9 +278,9 @@ def edit_my_cars(request, car_id):
         car.save()
 
         
-        return redirect('list_of_my_cars')  # Or redirect to a specific success page
+        return redirect('list_of_my_cars')  
 
-    # Populate the form with existing car data for editing
+    
     brands = Brand.objects.all()
     oil_types = OilType.objects.all()
     context = {
@@ -321,9 +319,9 @@ def edit_my_rent_cars(request,car_id):
         car.mileage = request.POST.get('mileage')
         car.rent_car_image = request.FILES.get('rent_car_image',car.rent_car_image)
         car.save()
-        return redirect('list_of_my_cars_for_rent')  # Or redirect to a specific success page
+        return redirect('list_of_my_cars_for_rent')  
 
-        # Populate the form with existing car data for editing
+        
     brands = Brand.objects.all()
     oil_types = OilType.objects.all()
     context = {
@@ -340,13 +338,12 @@ def edit_my_rent_cars(request,car_id):
 from django.utils import timezone
 
 def list_cars_for_sale(request):
-    # Retrieve all cars initially
+   
     cars = CarForSale.objects.all()
 
-    # Get the current year for filtering by year range
     current_year = timezone.now().year
 
-    # Filters from GET parameters
+   
     brand_filter = request.GET.get('brand')
     year_filter = request.GET.get('year')
     km_filter = request.GET.get('km')
@@ -354,7 +351,7 @@ def list_cars_for_sale(request):
     price_filter = request.GET.get('price')
     search_filter = request.GET.get('search')
 
-    # Apply filters
+   
     if brand_filter:
         print("Brand Filter:", brand_filter)
         cars = cars.filter(brand__name__iexact=brand_filter)
@@ -397,19 +394,19 @@ def list_cars_for_sale(request):
     if search_filter:
         cars = cars.filter(name__icontains=search_filter)
 
-    # Limit to 10 random cars
+    
     cars = cars.order_by('?')[:10]
 
-    # Get all brands and oil types for filters in the template
+    
     brands = Brand.objects.all()
     oil_types = OilType.objects.all()
     user_id = request.session.get('user_id')
     
-    # Fetch user information if the user is logged in
+   
     user_profile = None
     if user_id:
         try:
-            user_profile = User.objects.get(login_id=user_id)  # Assuming login_id is the foreign key
+            user_profile = User.objects.get(login_id=user_id) 
         except User.DoesNotExist:
             user_profile = None
 
@@ -441,10 +438,10 @@ def delete_car_for_rent(request, car_id):
         car = CarForRent.objects.get(id=car_id)
         car.delete()
         messages.success(request, "Car deleted successfully!")
-        return redirect('list_of_my_cars_for_rent')  # Updated with the correct URL name
+        return redirect('list_of_my_cars_for_rent')  
     except CarForRent.DoesNotExist:
         messages.error(request, "Car not found!")
-        return redirect('list_of_my_cars_for_rent')  # Updated with the correct URL name
+        return redirect('list_of_my_cars_for_rent') 
     
     
 #-------------------LIST OF CAR FOR RENT--------------------------------------------
@@ -485,11 +482,11 @@ def list_cars_for_rent(request):
     
     user_id = request.session.get('user_id')
     
-    # Fetch user information if the user is logged in
+   
     user_profile = None
     if user_id:
         try:
-            user_profile = User.objects.get(login_id=user_id)  # Assuming login_id is the foreign key
+            user_profile = User.objects.get(login_id=user_id)  
         except User.DoesNotExist:
             user_profile = None
 
@@ -498,7 +495,7 @@ def list_cars_for_rent(request):
         'cars': cars,
         'brands': brands,
         'oil_types': oil_types,
-       'user_profile': user_profile, # Pa
+       'user_profile': user_profile, 
     })
 
 # ==========================================================================
@@ -524,21 +521,18 @@ def rent_car_detail(request, car_id):
 
 
 def view_profile(request):
-    # Get the user ID from the session
     user_id = request.session.get('user_id')
     user_profile = None
 
-    # Check if the user is logged in
+    
     if user_id:
         try:
-            # Fetch the user's profile based on the user ID
-            user_profile = User.objects.get(login_id=user_id)  # Assuming login_id is the foreign key
+            user_profile = User.objects.get(login_id=user_id)  
         except User.DoesNotExist:
             user_profile = None
     
-    # Render the profile page with user profile data
     return render(request, 'my_profile.html', {
-        'user_profile': user_profile,  # Pass the user profile to the template
+        'user_profile': user_profile,  
     })
 
 
