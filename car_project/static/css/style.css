@@ -3,11 +3,11 @@ body,input,select,button,textarea{
 }
 /* navbar */
 .navbar {
-    background-color: black; /* Light background color */
-    /* padding: 10px 20px; Padding for the navbar */
+    background-color: black; 
+
     color: white;
-    border-bottom: 2px solid #fff; /* Thin white line */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Optional shadow */
+    border-bottom: 2px solid #fff; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); 
 }
 
 .navbar-container {
@@ -20,54 +20,54 @@ body,input,select,button,textarea{
 
 .navbar-link {
     color: white !important; 
-    text-decoration: none; /* Removes underline */
-    padding: 8px 15px; /* Padding for the link */
+    text-decoration: none; 
+    padding: 8px 15px;
 }
 
 .navbar-link:hover {
-    background-color: rgba(0, 128, 0, 0.1); /* Adds a hover effect */
-    border-radius: 4px; /* Rounds the corners of the hover effect */
+    background-color: rgba(0, 128, 0, 0.1); 
+    border-radius: 4px; 
 }
 
-/* General form styles for larger screens */
+/* --------------------------------------------------------------------------------- */
 form {
-    /* display: flex; Use flexbox for form layout */
-    /* flex-direction: row; Align items in a row on larger screens */
-    justify-content: space-between; /* Space elements evenly */
-    align-items: center; /* Center items vertically */
+    /* display: flex; */
+    /* flex-direction: row;  */
+    justify-content: space-between; 
+    align-items: center; 
 }
 
 form input,
 form select,
 form button {
-    flex: 1; /* Allow elements to take equal space */
-    margin: 0 10px; /* Space between elements */
-    padding: 10px; /* Padding inside the inputs/selects */
-    box-sizing: border-box; /* Ensure padding is included in width */
+    flex: 1; 
+    margin: 0 10px; 
+    padding: 10px; 
+    box-sizing: border-box; 
     width: fit-content;
 }
 
-/* Media query for small screens */
+
 @media (max-width: 456px) {
     .navbar-container {
-        flex-direction: column; /* Stacks items vertically */
-        align-items: flex-start; /* Align items to start */
+        flex-direction: column; 
+        align-items: flex-start; 
     }
 
     form {
-        width: 100%; /* Takes full width */
-        flex-direction: column; /* Stack form elements vertically */
+        width: 100%; 
+        flex-direction: column; 
     }
 
     form input,
     form select{
-        width: 100%; /* Makes each input full-width on small screens */
-        margin: 10px 0; /* Space between stacked elements */
+        width: 100%; 
+        margin: 10px 0; 
     }
 
     .navbar-link {
         margin-top: 10px;
-        text-align: left; /* Align links to the left on small screens */
+        text-align: left; 
     }
 }
 /* ----------------------------------------- */
@@ -105,7 +105,7 @@ button{
     padding: 20px;
     border-radius: 8px;
 
-    width: 200px; /* Default width for larger screens */
+    width: 200px; 
     /* text-align: center;
     margin-top: 30px;
     transition: transform 0.3s ease;
@@ -138,8 +138,9 @@ button{
     z-index: 500; 
 }
 
+/* -------------------------------------------------------------------- */
+
 /* home page */
-/* Cards */
 /* Cards */
 .content-card-container {
     display: flex;
@@ -153,7 +154,7 @@ button{
     color: white;
     padding: 20px;
     border-radius: 8px;
-    width: 200px; /* Default width for larger screens */
+    width: 200px; 
     text-align: center;
     margin-top: 30px;
     transition: transform 0.3s ease;
@@ -164,9 +165,9 @@ button{
     transform: scale(1.05);
 }
 
-/* Main content styling */
+/* Main */
 .main {
-    background-image: url('../images/cars.jpeg'); /* Adjust the path if needed */
+    background-image: url('../images/cars.jpeg'); 
     background-size: cover;
     background-position: center;
     min-height: 100vh;
@@ -178,13 +179,25 @@ button{
     padding: 20px;
 }
 
+.content {
+    width: 100%; 
+    max-width: 1000px; 
+    padding: 10px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    
+    box-sizing: border-box; 
+    flex-grow: 1; 
+}
+
 .content h1 {
-    font-size: 3vw; /* Responsive font size */
-    /* max-font-size: 2.5rem; Cap max font size */
+    font-size: 3vw; 
+    /* max-font-size: 2.5rem; */
     margin-bottom: 20px;
 }
 
-/* Cards */
+/* Content-cards */
 .content-card-container {
     display: flex;
     gap: 20px;
@@ -209,7 +222,7 @@ button{
     transform: scale(1.05);
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 768px) {
     .content {
         width: 90%;
@@ -249,23 +262,13 @@ button{
     }
 }
 
-/* General button styling */
+
 button {
-    font-size: 1.2rem; /* Maintain readable button font size */
-    padding: 10px 20px; /* Button padding for better visibility */
+    font-size: 1.2rem; 
+    padding: 10px 20px; 
 }
 
-.content {
-    width: 100%; /* Default width */
-    max-width: 1000px; /* Cap width for larger screens */
-    padding: 10px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    
-    box-sizing: border-box; /* Ensure padding is included in width */
-    flex-grow: 1; /* Allow content to grow with main */
-}
+
 /* login */
 
 .login,.registration{
@@ -274,22 +277,27 @@ button {
     margin-top: 50px;
     width: 50%;
     padding: 60px;
-    justify-content: center; /* Start from the top */
-    align-items: center; /* Center horizontally */
+    justify-content: center; 
+    align-items: center; 
     text-align: center;
     border-radius: 27px;
     border: rgba(0, 0, 0, 0.507) 3px solid;
 }
 .input-group{
     width: 100%;
-    max-width: 100%; /* Prevents overflow */
-     box-sizing: border-box; /*Prevents padding from */
+    max-width: 100%; 
+    box-sizing: border-box; 
 }
 .login{
     width: fit-content !important;
 }
 .registration{
     text-align: left !important;
+}
+.login-button{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
 }
 
 
@@ -303,38 +311,38 @@ button {
 }
 
 .card {
-    border: 1px solid #ddd; /* Border around the card */
+    border: 1px solid #ddd; 
     border-radius: 5px;
     padding: 10px;
-    width: 250px; /* Fixed width */
-    height: 300px; /* Fixed height */
-    text-align: center; /* Center align text */
+    width: 250px; 
+    height: 300px; 
+    text-align: center; 
     background-color: black;
     color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
-    display: flex; /* Enables flex properties for children */
-    flex-direction: column; /* Align children in a column */
-    justify-content: space-between; /* Distributes space evenly between items */
-    /* background: linear-gradient(to bottom, #f5f5f5, #ffffff); Light gray to white gradient */
-    border-radius: 8px;                                      /* Matches image rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+   
+    border-radius: 8px;                                      
     padding: 15px;
-    box-shadow: 2px 2px 6px rgba(172, 170, 170, 0.1);             /* Soft shadow for added depth */
+    box-shadow: 2px 2px 6px rgba(172, 170, 170, 0.1);             
     border: 5px solid #ddd;                        
 }
 
 .card img {
-    width: 100%; /* Ensures image fills the card width */
-    height: 200px; /* Maintains image aspect ratio */
+    width: 100%; 
+    height: 200px; 
     border-radius: 5px;
 }
 
 .h3 {
-    margin: 10px 0; /* Adds margin to the heading */
+    margin: 10px 0; 
     font-weight: bolder;
 }
 
 .card p {
-    margin: 0; /* Removes default margin */
+    margin: 0; 
 }
 
 form {
@@ -355,28 +363,29 @@ select, input {
     padding: 5px;
     border: white 1px solid;
 }
+
 .add-car-button-container {
-    display: flex;            /* Use Flexbox */
-    justify-content: center;  /* Center horizontally */
+    display: flex;           
+    justify-content: center;  
     margin-top: 20px;   
-    gap: 20px;               /* Space between buttons */
-    flex-wrap: wrap;         /* Allow buttons to wrap onto the next line */
+    gap: 20px;              
+    flex-wrap: wrap;         
 }
 
 
 
 .add-car-button-container button {
-    padding: 10px 20px;      /* Add padding for a better button appearance */
-    background-color: black;  /* Change button color */
-    color: white;             /* Change text color */
-    border: none;             /* Remove border */
-    border-radius: 5px;      /* Add rounded corners */
-    cursor: pointer;          /* Change cursor on hover */
-    font-size: 16px;          /* Font size */
-    min-width: 150px;         /* Minimum width for buttons */
-    max-width: 100%;          /* Ensure buttons do not exceed container width */
-    width: 100%;              /* Make buttons full width in smaller screens */
-    box-sizing: border-box;   /* Include padding in width calculations */
+    padding: 10px 20px;      
+    background-color: black; 
+    color: white;            
+    border: none;             
+    border-radius: 5px;      
+    cursor: pointer;          
+    font-size: 16px;          
+    min-width: 150px;         
+    max-width: 100%;          
+    width: 100%;              
+    box-sizing: border-box;   
 }
 
 .add-car-button-container button:hover{
@@ -386,7 +395,7 @@ select, input {
 
 @media (max-width: 768px) {
     .add-car-button-container button {
-        font-size: 14px;      /* Slightly smaller font size for mobile */
+        font-size: 14px;      
     }
 }
 
@@ -402,93 +411,98 @@ select, input {
     border-radius: 5px;
     background-color: white;
     display: inline-block;
-    width: 100%;               /* Make the container full width */
-    max-width: 600px;         /* Set a max width to prevent it from getting too wide */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow for depth */
+    width: 100%;              
+    max-width: 600px;         
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
 }
 
 .profile-container .img {
-    width: 100%;              /* Ensure the image takes full width of the container */
-    height: auto;             /* Maintain aspect ratio */
-    max-height: 300px;       /* Limit the maximum height */
-    border-radius: 2px;       /* Keep the border radius */
+    width: 100%;              
+    height: auto;            
+    max-height: 300px;       
+    border-radius: 2px;       
 }
 
 @media (max-width: 768px) {
     .profile-container {
-        margin-top: 30px;    /* Adjust margin for smaller screens */
-        padding: 15px;       /* Reduce padding for smaller screens */
+        margin-top: 30px;    
+        padding: 15px;       
     }
     
     .profile-container .img {
-        max-height: 200px;    /* Reduce max height for smaller screens */
+        max-height: 200px;    
     }
 }
-.details a {
-    word-wrap: break-word;   /* Allows long words to break onto the next line */
-    overflow-wrap: break-word; /* Breaks long URLs if necessary */
-    display: inline-block;    /* Ensures the link behaves like a block element */
-    max-width: 100%;         /* Prevents it from exceeding the container */
-}
+
+/* details */
 
 .details {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
-    margin: 0 auto;  /* Center the container */
-    padding: 0;       /* Remove any padding that might cause overflow */
-    overflow: hidden; /* Hide any overflow */
+    flex-wrap: wrap; 
+    margin: 0 auto;  
+    padding: 0;       
+    overflow: hidden; 
 }
 
+.details a {
+    word-wrap: break-word;   
+    overflow-wrap: break-word; 
+    display: inline-block;    
+    max-width: 100%;         
+}
+
+
+
 .details .container {
-    max-width: 800px;  /* Maximum width */
-    padding: 20px;     /* Padding around the content */
-    overflow: hidden;  /* Hide any overflow */
-    width: 100%;       /* Make the container full width */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
-    border-radius: 5px; /* Optional: Add rounded corners */
+    max-width: 800px;  
+    padding: 20px;     
+    overflow: hidden;  
+    width: 100%;       
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    border-radius: 5px; 
 }
 
 .container img {
-    width: 100%;         /* Makes the image full-width */
-    height: auto;        /* Maintains the aspect ratio */
-    max-height: 400px;   /* Limit the height for larger screens */
-    object-fit: cover;   /* Crops the image to fit the fixed size */
-    display: block;      /* Remove any inline spacing */
+    width: 100%;         
+    height: auto;        
+    max-height: 400px;  
+    object-fit: cover;   
+    display: block;      
 }
 
-/* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
     .details {
-        /* flex-direction: column; Stack items vertically */
-        align-items: center;    /* Center items horizontally */
+        /* flex-direction: column;  */
+        align-items: center;    
     }
 
     .details .container {
-        max-width: 90%;         /* Use more screen space on smaller devices */
-        padding: 15px;         /* Reduce padding for smaller devices */
-        margin: 0;             /* Ensure no extra margin is applied */
+        max-width: 90%;         
+        padding: 15px;        
+        margin: 0;             
     }
 
     .container img {
-        max-height: 250px;      /* Reduce max height on smaller screens */
+        max-height: 250px;      
     }
 }
 
 @media (max-width: 480px) {
     .container img {
-        max-height: 200px;      /* Further reduce max height for very small screens */
+        max-height: 200px;      
     }
 }
 
+/* add edit */
 .add,.edit{
     background-color: white;
     color: black;
     /* margin-top: 50px; */
     width: 100%;
     /* padding-left: 35%; */
-    justify-content: center; /* Start from the top */
-    /* align-items: center; Center horizontally */
+    justify-content: center; 
+    /* align-items: center;  */
     /* text-align: center; */
     /* border-radius: 27px;
     border: rgba(0, 0, 0, 0.507) 3px solid; */
@@ -497,45 +511,45 @@ select, input {
 .add-edit {
     background-color: white;
     color: black;
-    justify-content: center; /* Start from the top */
-    align-items: center; /* Center horizontally */
+    justify-content: center; 
+    align-items: center; 
     margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
     /* text-align: center; */
-    padding: 20px 10%; /* Add horizontal padding for spacing on both sides */
-    max-width: 600px; /* Set a maximum width */
-    /* margin: 0 auto; Center the container horizontally */
-    width: 100%; /* Ensure it takes full width up to max-width */
+    padding: 20px 10%; 
+    max-width: 600px; 
+    
+    width: 100%; 
 }
 
 @media (max-width: 768px) {
     .add-edit {
-        padding: 10px 5%; /* Adjust padding for smaller screens */
-        max-width: 90%; /* Allow more flexibility on small screens */
+        padding: 10px 5%; 
+        max-width: 90%; 
     }
 }
 
 .form-group {
     display: flex; 
-    align-items: center; /* Center items vertically */
-    margin-bottom: 15px; /* Space between form groups */
+    align-items: center; 
+    margin-bottom: 15px; 
 }
 
 label {
-    margin-right: 10px; /* Space between label and input */
-    font-weight: bold; /* Optional: Make labels bold for better readability */
-    /* flex: 1; Allows label to take up space */
+    margin-right: 10px; 
+    font-weight: bold; 
+    /* flex: 1; */
 }
 
 .add-edit input, 
 .add-edit textarea, 
 .add-edit select {
-    flex: 2; /* Input fields take up remaining space */
-    width: 100%; /* Ensure inputs take full width */
-    max-width: 600px; /* Set a max-width if needed */
-    padding: 10px; /* Add padding for better touch targets */
-    box-sizing: border-box; /* Include padding in the width */
+    flex: 2; 
+    width: 100%; 
+    max-width: 600px; 
+    padding: 10px; 
+    box-sizing: border-box; 
 }
 
 
@@ -546,50 +560,51 @@ label {
 
 .responsive-textarea {
     width: 100%;
-    min-height: 100px; /* Minimum height */
-    max-height: 300px; /* Maximum height */
-    resize: vertical; /* Allow vertical resizing */
+    min-height: 100px; 
+    max-height: 300px; 
+    resize: vertical; 
 }
 
 @media (max-width: 768px) {
     .responsive-textarea {
         /* width: 100%; */
-        height: 150px; /* Adjust height for smaller screens */
+        height: 150px; 
     }
 }
 
 
 .form-group {
-    display: flex; /* Use flexbox for layout */
+    display: flex; 
     flex-direction: column; 
     align-items: center;
-    margin-bottom: 15px; /* Space between form groups */
+    margin-bottom: 15px; 
 }
 
 label {
-    margin-bottom: 5px; /* Space between label and input */
-    font-weight: bold; /* Optional: Make labels bold for better readability */
+    margin-bottom: 5px; 
+    font-weight: bold; 
 }
 
 .add-edit input, 
 .add-edit textarea, 
 .add-edit select {
-    width: 100%; /* Ensure inputs take full width */
-    max-width: 600px; /* Set a max-width if needed */
-    padding: 10px; /* Add padding for better touch targets */
-    box-sizing: border-box; /* Include padding in the width */
+    width: 100%; 
+    max-width: 600px; 
+    padding: 10px; 
+    box-sizing: border-box; 
 }
 
 .radio-group label {
-    /* margin-right: 3pxpx; Space between radio options */
-    display: flex; /* Ensure radio and text are in the same row */
-    align-items: center; /* Center align text with radio button */
+    /* margin-right: 3pxpx; */
+    display: flex; 
+    align-items: center; 
 }
+
 .radio-group {
     margin-top: 10px;
-    display: flex; /* Align radio options in a row */
-    align-items: center; /* Center options vertically */
-    /* margin-left: 10px; Add space between the label and radio buttons */
+    display: flex; 
+    align-items: center; 
+    /* margin-left: 10px;  */
 }
 
 button{
@@ -604,8 +619,3 @@ button{
     /* border-radius: 20%; */
 /* }  */
 
-.login-button{
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-}
