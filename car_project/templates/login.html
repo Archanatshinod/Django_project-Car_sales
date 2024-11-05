@@ -2,6 +2,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +33,7 @@
                 <label class="l" for="password">Password: </label>
                 <input type="password" name="password" class="form-control" id="passwordField" placeholder="Enter your password" required><br><br>
                 <div>
-                    <div class="add-car-button-container">
+                    <div class="login-button">
                     <button type="submit">LOGIN</button></div><br><br>
                     <div class="ack">Don't have an account? <a href="{% url 'User_registration' %}" class="register">Register</a></div>
                 </div>

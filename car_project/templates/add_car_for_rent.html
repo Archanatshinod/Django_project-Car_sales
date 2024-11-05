@@ -1,13 +1,22 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Car for Rent</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Julius Sans One">
 </head>
 <body>
-    <a href="{% url 'list_cars_for_rent' %}">BACK TO LIST</a>
+    <nav class="navbar sticky-top bg-body-tertiary">
+        <div class="navbar-container">
+            <a href="{% url 'list_cars_for_rent' %}" class="navbar-link">Back To List of cars</a>
+        </div>
+    </nav>
+    <div class="add-edit">
     <h2>Add Car for Rent</h2>
+    <div class="add">
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         
@@ -25,7 +34,7 @@
         </select><br><br>
 
         <label for="description">Description:</label>
-        <textarea name="description" rows="4" cols="50"></textarea><br><br>
+        <textarea name="description" class="responsive-textarea" rows="4" cols="50"></textarea><br><br>
     
         <label for="price">Price Per Day:</label>
         <input type="number" name="price_per_day" step="0.01" required><br><br>
@@ -36,7 +45,10 @@
         <label for="front_image">Car Image:</label>
         <input type="file" name="rent_car_image" accept="image/*"><br><br>
     
-        <button type="submit">Add Car</button>
+        <div class="add-car-button-container">
+        <button type="submit">Add Car</button></div>
     </form>
+</div>
+</div>
 </body>
 </html>

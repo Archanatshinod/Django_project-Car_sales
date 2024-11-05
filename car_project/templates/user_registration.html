@@ -4,9 +4,11 @@
 <!DOCTYPE html>
 <head>
     <title>User registeration</title>
-</head>
-<link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Julius Sans One">
+</head>
+
 <body>
   <nav class="navbar sticky-top bg-body-tertiary">
     <div class="navbar-container">
@@ -15,7 +17,9 @@
 </nav>
 <div class="main">
     <div class="registration" style="text-align: center;">
+      <div class="add-edit">
         <div><h3>USER REGISTRATION</h3></div>
+        <div class="add">
         <form method="post" action="{% url 'User_registration' %}" enctype="multipart/form-data">
           {% csrf_token %}
         <div class="input-group">
@@ -54,7 +58,7 @@
             <input type="password" class="form-control" name="Confirm_password" placeholder="Confirm your Password" aria-label="password2" aria-describedby="basic-addon1"placeholder="**********" required="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
           </div><br>
           <div class="mb-4" style="text-align: center;">
-            <div class="add-car-button-container">
+            <div class="login-button">
             <button type="submit" class="btn btn-primary btn-lg">REGISTER</button></div>
             <div style="width: 40%;margin: auto; text-align: center; font-size: large; padding: 10px;"> {% if x %}
               <p class="text-danger">{{x}}</p>
@@ -63,6 +67,8 @@
         </div>
         
       </form>
+      </div>
+      </div>
       {% if message %}
             <p style="color: red;">{{ message }}</p>  
         {% endif %}

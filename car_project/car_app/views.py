@@ -343,6 +343,7 @@ def list_cars_for_sale(request):
 
     current_year = timezone.now().year
 
+    request.session['previous_page'] = request.build_absolute_uri()
    
     brand_filter = request.GET.get('brand')
     year_filter = request.GET.get('year')
@@ -448,7 +449,7 @@ def delete_car_for_rent(request, car_id):
 def list_cars_for_rent(request):
     
     cars = CarForRent.objects.all()
-    
+    request.session['previous_page'] = request.build_absolute_uri()
     
     brand_filter = request.GET.get('brand')
     oil_type_filter = request.GET.get('oil_type')
@@ -472,13 +473,15 @@ def list_cars_for_rent(request):
         elif price_filter == 'above_10k':
             cars = cars.filter(price_per_day__gt=10000)
 
+    if search_filter:
+        cars = cars.filter(name__icontains=search_filter) 
+
     cars = cars.order_by('?')[:10]
 
     brands = Brand.objects.all()
     oil_types = OilType.objects.all()
 
-    if search_filter:
-        cars = cars.filter(name__icontains=search_filter)  
+    
     
     user_id = request.session.get('user_id')
     
@@ -530,9 +533,10 @@ def view_profile(request):
             user_profile = User.objects.get(login_id=user_id)  
         except User.DoesNotExist:
             user_profile = None
-    
+
+   
     return render(request, 'my_profile.html', {
-        'user_profile': user_profile,  
+        'user_profile': user_profile, 
     })
 
 

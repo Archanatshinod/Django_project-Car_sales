@@ -1,14 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit My Car for Rent</title>
-    <style>
-    </style>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Julius Sans One">
 </head>
 <body>
+    <nav class="navbar sticky-top bg-body-tertiary">
+        <div class="navbar-container">
+            <a href="{% url 'list_of_my_cars_for_rent' %}" class="navbar-link">Back to car list</a>
+        </div>
+    </nav>
+    <div class="add-edit">
     <h2>Edit My Car for Rent</h2>
+
+    <div class="add">
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         
@@ -47,7 +56,9 @@
         {% endif %}
         
         <br><br>
-        <button type="submit">Save Changes</button>
+        <div class="add-car-button-container">
+        <button type="submit">Save Changes</button></div>
     </form>
+    </div></div>
 </body>
 </html>

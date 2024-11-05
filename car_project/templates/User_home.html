@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>Home Page</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
@@ -24,29 +25,29 @@
             <a href="{% url 'Login' %}" class="navbar-link">Login</a>
         </div>
     </nav>
-   <div class="main">
-    <div class="content">
-    <h1>Welcome to the Home Page</h1>
-    <div class="card-container">
-        <a href="{% url 'Login' %}?next=list_cars_for_sale"><div class="card">
-             <h3>Cars for Sale</h3>
-         </div></a>
-         <a href="{% url 'Login' %}?next=list_cars_for_rent"><div class="card">
-             <h3>Cars for Rent</h3>
-         </div></a>
-     </div>
-        
+    <div class="main">
+        <div class="content">
+            <h2>Welcome to the Home Page</h2>
+           <h1>Discover the Best Deals on Cars for Sale and Rent</h1> 
+            <div class="content-card-container">
+                <a href="{% url 'Login' %}?next=list_cars_for_sale">
+                    <div class="content-card">
+                        <h3>Cars for Sale</h3>
+                    </div>
+                </a>
+                <a href="{% url 'Login' %}?next=list_cars_for_rent">
+                    <div class="content-card">
+                        <h3>Cars for Rent</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
-
-</div>
     <div id="overlay" class="overlay" onclick="closePopup()"></div>
-    
-
     <div id="loginPopup" class="popup">
         <h3>Please Log In</h3>
         <p>You need to log in to access this feature.</p>
         <button onclick="closePopup()">Close</button>
     </div>
-</div>
 </body>
 </html>

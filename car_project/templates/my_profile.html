@@ -11,30 +11,33 @@
 <body>
     <nav class="navbar sticky-top bg-body-tertiary">
         <div class="navbar-container">
-            <a href="{% url 'list_cars_for_sale' %}" class="navbar-link">Back to car list</a>
+            {% if request.session.previous_page %}
+            <a href="{{ request.session.previous_page }}" class="navbar-link">Back to Car List</a>
+            {% endif %}
         </div>
     </nav>
     <div class="details">
     <div class="profile-container">
-        <h1>User Profile</h1>
+        <h2>User Profile</h2>
         {% if user_profile %}
             <img src="{{ user_profile.profile_picture.url }}" alt="Profile Picture" style="width:170px; height:150px; border-radius: 50%;">
             <p><strong>Name:</strong> {{ user_profile.Name }}</p>
             <p><strong>Email:</strong> {{ user_profile.Email }}</p>
             <p><strong>Phone:</strong> {{ user_profile.Phone }}</p>
-            <p><strong>Location:</strong> <a href="{{ user_profile.my_location_link }}" target="_blank">{{ user_profile.my_location_link }}</a></p>
             <p><strong>WhatsApp:</strong> {{ user_profile.whatsapp_number }}</p>
+            <p><strong>Location:</strong> <a href="{{ user_profile.my_location_link }}" target="_blank">{{ user_profile.my_location_link }}</a></p>
+           
         {% else %}
             <p>No profile information available.</p>
         {% endif %}
     </div>
 </div>
 <div class="content">
-    <div class="card-container">
-        <a href="{% url 'list_of_my_cars' %}"><div class="card">
+    <div class="content-card-container">
+        <a href="{% url 'list_of_my_cars' %}"><div class="content-card">
              <h3>My Cars for Sale</h3>
          </div></a>
-         <a href="{% url 'list_of_my_cars_for_rent' %}"><div class="card">
+         <a href="{% url 'list_of_my_cars_for_rent' %}"><div class="content-card">
              <h3>My Cars for Rent</h3>
          </div></a>
      </div>
